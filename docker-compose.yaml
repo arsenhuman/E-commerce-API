@@ -1,0 +1,26 @@
+
+services:
+  backend:
+    build: .
+    container_name: backend
+    ports:
+      - "3000:3000"
+    networks:
+      - ecommerce-project-network
+    depends_on:
+      - database
+
+  database:
+    image: skazuki/alpine-mongodb
+    container_name: database
+    networks:
+      - ecommerce-project-network
+
+networks:
+  ecommerce-project-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.27.0.0/24
+
+
